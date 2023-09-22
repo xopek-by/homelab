@@ -1,0 +1,48 @@
+version: '3.3'
+services:
+ nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    env_file:
+      - stack.env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT}
+      - PHP_UPLOAD_LIMIT=${PHP_UPLOAD_LIMIT}
+      - TZ=${TZ}
+
+    volumes:
+      - ${CONFIG}:/config
+      - ${DATA}:/data
+    ports:
+      - 5443:443
+    restart: unless-stopped
+    links:
+      - nextcloud-mariadb
+    depends_on:
+      - nextcloud-mariadb
+    
+ nextcloud-mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: nextloud-mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
+    volumes:
+      - ${MARIADB}:/config
+    ports:
+      - 5306:3306
+    restart: unless-stopped
+
+    
+networks:
+  default:
+    name: nextcloud
+    driver: bridge
