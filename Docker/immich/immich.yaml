@@ -8,7 +8,7 @@ services:
     volumes:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
     env_file:
-      - stackstack.env
+      - stack.env
     depends_on:
       - redis
       - database
