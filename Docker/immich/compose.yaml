@@ -9,6 +9,8 @@ services:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
     env_file:
       - stack.env
+    ports:
+      - 2283:3001
     depends_on:
       - redis
       - database
@@ -37,13 +39,6 @@ services:
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
     volumes:
       - model-cache:/cache
-    env_file:
-      - stack.env
-    restart: unless-stopped
-
-  immich-web:
-    container_name: immich_web
-    image: ghcr.io/immich-app/immich-web:${IMMICH_VERSION:-release}
     env_file:
       - stack.env
     restart: unless-stopped
@@ -78,19 +73,6 @@ services:
       - pgdata:/var/lib/postgresql/data
     restart: unless-stopped
 
-  immich-proxy:
-    container_name: immich_proxy
-    image: ghcr.io/immich-app/immich-proxy:${IMMICH_VERSION:-release}
-    environment:
-      # Make sure these values get passed through from the env file
-      - IMMICH_SERVER_URL
-      - IMMICH_WEB_URL
-    ports:
-      - 2283:8080
-    depends_on:
-      - immich-server
-      - immich-web
-    restart: unless-stopped
 
 volumes:
   pgdata:
