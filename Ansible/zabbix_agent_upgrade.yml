@@ -1,0 +1,16 @@
+- name: Upgrade zabbix agent
+  hosts: zagents
+  become: true
+
+  tasks:
+   - name: Ensure that Zabbix agent is at the latest version 
+     ansible.builtin.apt:
+      name: zabbix-agent2
+      state: latest
+     register: zabbix_agent2_status
+
+   - name: Upgrade Zabbix agent if not latest
+     ansible.builtin.apt:
+      name: zabbix-agent2
+      upgrade: yes
+     when: zabbix_agent2_status.changed

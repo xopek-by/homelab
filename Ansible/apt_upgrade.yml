@@ -1,0 +1,14 @@
+- name: Upgrade packages
+  hosts: vms
+  become: true
+
+  tasks:
+   - name: Update cache 
+     ansible.builtin.apt:
+      update_cache: true
+     register: cache_updated
+
+   - name: Upgrade packages if something is changed
+     ansible.builtin.apt:
+      upgrade: "yes"
+     when: cache_updated.changed
