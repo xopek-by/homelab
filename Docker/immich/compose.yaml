@@ -14,7 +14,6 @@ services:
     depends_on:
       - redis
       - database
-
     restart: unless-stopped
 
   immich-microservices:
@@ -49,7 +48,7 @@ services:
 
   database:
     container_name: immich_postgres
-    image: tensorchord/pgvecto-rs:pg14-v0.1.11
+    image: tensorchord/pgvecto-rs:pg14-v0.1.11    
     env_file:
       - stack.env
     environment:
