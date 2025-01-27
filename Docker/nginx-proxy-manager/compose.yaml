@@ -1,10 +1,9 @@
-version: '3.8'
 services:
   app:
     image: jc21/nginx-proxy-manager:latest
     restart: unless-stopped
     env_file:
-      - stack.env
+      - .env
     ports:
       - 1080:80
       - 1081:81
