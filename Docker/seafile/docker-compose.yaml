@@ -1,7 +1,7 @@
 services:
   db:
     image: mariadb:latest
-    container_name: seafile-mysql
+    container_name: seafile-database
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_LOG_CONSOLE=true
