@@ -1,5 +1,3 @@
----
-version: "2"
 services:
   bookstack:
     image: lscr.io/linuxserver/bookstack
@@ -11,20 +9,19 @@ services:
       - DB_HOST=bookstack_db
       - DB_PORT=3306
       - DB_USER=bookstack
-      - DB_PASS=${DB_PASS}
+      - DB_PASS=${DB_USER_PASS}
       - DB_DATABASE=bookstackapp
     volumes:
-      - ${CONFIG_PATH}:/config
+      - ${PATH_TO_CONFIG}:/config
     ports:
       - 6875:80
     restart: unless-stopped
-    env_file:
-      - stack.env
     depends_on:
-      - bookstack_db
-  bookstack_db:
+      - bookstack_database
+ 
+  bookstack_database:
     image: lscr.io/linuxserver/mariadb
-    container_name: bookstack_db
+    container_name: bookstack_database
     environment:
       - PUID=1000
       - PGID=1000
@@ -32,9 +29,7 @@ services:
       - TZ=${TZ}
       - MYSQL_DATABASE=bookstackapp
       - MYSQL_USER=bookstack
-      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_PASSWORD=${DB_USER_PASS}
     volumes:
-      - ${DB_DATA}:/config
+      - ${PATH_TO_DB}:/config
     restart: unless-stopped
-    env_file:
-      - stack.env
