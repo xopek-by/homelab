@@ -1,0 +1,16 @@
+services:
+  webtop:
+    image: lscr.io/linuxserver/webtop:${VERSION:- latest} # which version to use, latest is default. List of versions: https://docs.linuxserver.io/images/docker-webtop/#version-tags
+    container_name: webtop
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Warsaw
+    volumes:
+      - ${PATH_TO_CONFIG}:/config
+    ports:
+      - 3000:3000
+#    devices:
+#      - /dev/dri:/dev/dri #optional
+    shm_size: "2gb" #optional
+    restart: unless-stopped
