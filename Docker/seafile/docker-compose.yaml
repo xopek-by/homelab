@@ -42,6 +42,7 @@ services:
     volumes:
       - ${SEAFILE_DATA_VOLUME:-/opt/seafile-data}:/shared
     environment:
+      - SITE_ROOT=/
       - DB_HOST=db
       - DB_PORT=3306
       - DB_USER=seafile
