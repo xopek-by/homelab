@@ -6,7 +6,7 @@ services:
       - .env
     ports:
       - 880:80
-      - 881:81
+      - 81:81
       - 8443:443
     volumes:
       - ${NGINX_DATA}:/data
