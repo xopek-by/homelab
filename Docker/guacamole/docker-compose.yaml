@@ -1,6 +1,6 @@
 services:
   guacamole:
-    image: abesnier/guacamole
+    image: abesnier/guacamole:latest
     container_name: guacamole
     volumes:
       - ${PATH_TO_CONFIG}:/config
