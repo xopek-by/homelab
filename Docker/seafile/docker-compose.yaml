@@ -1,7 +1,7 @@
 services:
   db:
     image: mariadb:latest
-    container_name: seafile-database
+    container_name: seafile_database
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_LOG_CONSOLE=true
@@ -28,7 +28,7 @@ services:
 
   memcached:
     image: memcached
-    container_name: seafile-memcached
+    container_name: seafile_memcached
     entrypoint: memcached -m 256
     restart: unless-stopped
     networks:
@@ -36,7 +36,7 @@ services:
 
   seafile:
     image: seafileltd/seafile-mc:12.0-latest
-    container_name: seafile
+    container_name: seafile_server
     ports:
       - "80:80"
     volumes:
