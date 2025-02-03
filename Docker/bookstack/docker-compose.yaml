@@ -6,7 +6,7 @@ services:
       - PUID=1000
       - PGID=1000
       - APP_URL=${APP_URL}
-      - DB_HOST=bookstack_db
+      - DB_HOST=bookstack_database
       - DB_PORT=3306
       - DB_USER=bookstack
       - DB_PASS=${DB_USER_PASS}
