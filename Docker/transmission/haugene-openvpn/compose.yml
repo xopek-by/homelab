@@ -1,0 +1,26 @@
+services:
+    transmission-openvpn:
+        image: haugene/transmission-openvpn
+        cap_add:
+          - NET_ADMIN
+        volumes:
+          - ${PATH_TO_CONFIG}:/config
+          - ${PATH_TO_DOWNLOADS}:/downloads # optional
+          - ${PATH_TO_WATCH_FOLDER}:/watch # optional
+        environment:
+          - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
+          - OPENVPN_CONFIG=${OPENVPN_CONFIG}
+          - OPENVPN_USERNAME=${OPENVPN_USERNAME}
+          - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+          - TRANS_USER=${TRANS_USER} # optional for web interface
+          - TRANS_PASS=${TRANS_PASS} # optional for web interface
+          - LOCAL_NETWORK=192.168.0.0/16
+        logging:
+          driver: json-file
+          options:
+            max-size: 10m
+        ports:
+          - '9091:9091'
+
+# Not all the countries and servers are supporting p2p, so you need to choose the right server. Here's the hint:
+# https://support.nordvpn.com/hc/en-us/articles/20465085067665-NordVPN-proxy-setup-for-BitTorrent
