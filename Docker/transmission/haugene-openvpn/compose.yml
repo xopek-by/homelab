@@ -9,7 +9,8 @@ services:
           - ${PATH_TO_WATCH_FOLDER}:/watch # optional
         environment:
           - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
-          - OPENVPN_CONFIG=${OPENVPN_CONFIG}
+          - NORDVPN_COUNTRY=${NORDVPN_COUNTRY}
+#          - OPENVPN_CONFIG=${OPENVPN_CONFIG}
           - OPENVPN_USERNAME=${OPENVPN_USERNAME}
           - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
           - TRANS_USER=${TRANS_USER} # optional for web interface
