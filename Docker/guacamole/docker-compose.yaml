@@ -4,6 +4,7 @@
 services:
   guacamole:
     image: abesnier/guacamole:latest
+    restart: unless-stopped
     container_name: guacamole
     volumes:
       - ${PATH_TO_CONFIG}:/config
