@@ -6,8 +6,8 @@ services:
           - NET_ADMIN
         volumes:
           - ${PATH_TO_CONFIG}:/config
-          - ${PATH_TO_DOWNLOADS}:/downloads # optional
-          - ${PATH_TO_WATCH_FOLDER}:/watch # optional
+          - ${PATH_TO_DOWNLOADS}:/data # optional
+          - ${PATH_TO_WATCH_FOLDER}:/data/watch # optional
         environment:
           - PUID=1000
           - PGID=1000
