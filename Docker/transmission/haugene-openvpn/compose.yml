@@ -1,6 +1,7 @@
 services:
     transmission-openvpn:
         image: haugene/transmission-openvpn
+        container_name: transmission-openvpn
         cap_add:
           - NET_ADMIN
         volumes:
@@ -8,6 +9,9 @@ services:
           - ${PATH_TO_DOWNLOADS}:/downloads # optional
           - ${PATH_TO_WATCH_FOLDER}:/watch # optional
         environment:
+          - PUID=1000
+          - PGID=1000
+          - TZ=Europe/Warsaw
           - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
           - NORDVPN_COUNTRY=${NORDVPN_COUNTRY}
 #          - OPENVPN_CONFIG=${OPENVPN_CONFIG}
@@ -16,6 +20,7 @@ services:
           - OPENVPN_USERNAME=${OPENVPN_USERNAME}
           - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
           - LOCAL_NETWORK=${LOCAL_NETWORK} # see .env file for comments
+          - TRANSMISSION_WEB_UI=${TRANSMISSION_WEB_UI} # optional
         logging:
           driver: json-file
           options:
