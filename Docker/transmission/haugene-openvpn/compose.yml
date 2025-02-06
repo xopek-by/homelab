@@ -11,11 +11,13 @@ services:
           - OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
           - NORDVPN_COUNTRY=${NORDVPN_COUNTRY}
 #          - OPENVPN_CONFIG=${OPENVPN_CONFIG}
+# Do not use NordVPN username! 
+# To obtain the credentials proceed with the manual configuration in NordVPN account.
           - OPENVPN_USERNAME=${OPENVPN_USERNAME}
           - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
           - TRANS_USER=${TRANS_USER} # optional for web interface
           - TRANS_PASS=${TRANS_PASS} # optional for web interface
-          - LOCAL_NETWORK=192.168.0.0/16
+          - LOCAL_NETWORK=${LOCAL_NETWORK} # see .env file for comments
         logging:
           driver: json-file
           options:
