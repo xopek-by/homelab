@@ -2,6 +2,7 @@ services:
     transmission-openvpn:
         image: haugene/transmission-openvpn
         container_name: transmission-openvpn
+        restart: unless-stopped
         cap_add:
           - NET_ADMIN
         volumes:
