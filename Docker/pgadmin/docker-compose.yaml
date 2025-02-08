@@ -9,9 +9,6 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${USERNAME}
       PGADMIN_DEFAULT_PASSWORD: ${PASSWORD}
     volumes:
-      - pgadmin-data:/var/lib/pgadmin
+      - ${PGADMIN_DATA}:/var/lib/pgadmin
     extra_hosts:
       - "host.docker.internal:host-gateway" 
-
-volumes:
-  pgadmin-data:
