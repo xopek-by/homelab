@@ -4,7 +4,7 @@ services:
     image: oznu/cloudflare-ddns:latest
     restart: always
     env_file:
-      - stack.env
+      - .env
     environment:
       - API_KEY=${CLOUDFLARE_API}
       - ZONE=${ZONE}
