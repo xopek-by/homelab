@@ -1,39 +1,22 @@
-version: "3.7"
-
 services:
-  mealie-frontend:
-    image: hkotel/mealie:frontend-v1.0.0beta-5
-    container_name: mealie-frontend
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest # 
+    container_name: mealie
     env_file:
-      - stack.env
-    environment:
-    # Set Frontend ENV Variables Here
-      - API_URL=http://mealie-api:9000
+      - .env
     restart: unless-stopped
     ports:
-      - "9925:3000"
-    volumes:
-      - ${DATA_FOLDER}/mealie:/app/data/
-  mealie-api:
-    image: hkotel/mealie:api-v1.0.0beta-5
-    container_name: mealie-api
+      - "9925:9000" # 
     deploy:
       resources:
         limits:
-          memory: 1024M
+          memory: 1000M # 
     volumes:
-      - ${DATA_FOLDER}/mealie:/app/data/
+      - ${DATA_FOLDER}:/app/data/
     environment:
-    # Set Backend ENV Variables Here
-      - ALLOW_SIGNUP=true
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Warsaw
-      - MAX_WORKERS=1
-      - WEB_CONCURRENCY=1
-      - BASE_URL=${BASE_URL}
-    restart: unless-stopped
-
-volumes:
-  mealie-data:
-    driver: local
+      # Set Backend ENV Variables Here
+      ALLOW_SIGNUP: "false"
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Warsaw
+      BASE_URL: ${YOUR_DOMAIN:-https://mealie.yourdomain.com} 
