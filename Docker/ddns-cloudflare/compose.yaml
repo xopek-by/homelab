@@ -1,6 +1,7 @@
 services:
   cloudflare-ddns:
     image: favonia/cloudflare-ddns:latest
+    container_name: cloudflare-ddns
     # Choose the appropriate tag based on your need:
     # - "latest" for the latest stable version (which could become 2.x.y
     #   in the future and break things)
