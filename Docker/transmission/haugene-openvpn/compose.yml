@@ -4,9 +4,9 @@ services:
         container_name: transmission-openvpn
         restart: unless-stopped
         deploy:
-        resources:
-          limits:
-            memory: 500M # adjust to your needs
+          resources:
+            limits:
+              memory: 500M # adjust to your needs
         cap_add:
           - NET_ADMIN
         volumes:
