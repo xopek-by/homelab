@@ -1,15 +1,11 @@
-version: "3"
 services:
   portainer:
     container_name: portainer
-    image: portainer/portainer-ce:latest
+    image: portainer/portainer-ee:latest
     ports:
-      - 9443:9443    
-    env_file:
-      - .env    
+      - 9443:9443
+      - 8000:8000
     volumes:
         - ${PORTAINER_DATA}:/data
         - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
-volumes:
-  data:
