@@ -1,5 +1,3 @@
-version: '2'
-
 services:
   cloudflare-ddns:
     container_name: ddns-cloudflare
