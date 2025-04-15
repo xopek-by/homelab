@@ -1,0 +1,52 @@
+services:
+  garmin-fetch-data:
+    restart: unless-stopped
+    image: thisisarpanghosh/garmin-fetch-data:latest
+    container_name: garmin-fetch-data
+    depends_on:
+      - influxdb
+    volumes:
+      - ./garminconnect-tokens:/home/appuser/.garminconnect # (persistant tokens storage - garminconnect-tokens folder must be owned by 1000:1000)
+    environment:
+      - INFLUXDB_HOST=influxdb
+      - INFLUXDB_PORT=8086
+      - INFLUXDB_USERNAME=influxdb_user
+      - INFLUXDB_PASSWORD=influxdb_secret_password
+      - INFLUXDB_DATABASE=GarminStats
+      - UPDATE_INTERVAL_SECONDS=300
+      - LOG_LEVEL=INFO
+      - GARMINCONNECT_EMAIL=${GARMINCONNECT_EMAIL}
+      - GARMINCONNECT_BASE64_PASSWORD=${GARMINCONNECT_PASSWORD} # (must be base64 encoded)
+
+
+  influxdb:
+    restart: unless-stopped
+    container_name: influxdb
+    hostname: influxdb
+    environment:
+      - INFLUXDB_DB=GarminStats
+      - INFLUXDB_USER=influxdb_user
+      - INFLUXDB_USER_PASSWORD=influxdb_secret_password
+      - INFLUXDB_DATA_INDEX_VERSION=tsi1
+    ports:
+      - '8086:8086'
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+    image: 'influxdb:1.11'
+
+  grafana:
+    restart: unless-stopped
+    container_name: grafana
+    hostname: grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - '3000:3000'
+    image: 'grafana/grafana:latest'
+
+volumes:
+  influxdb_data:
+  grafana_data:
