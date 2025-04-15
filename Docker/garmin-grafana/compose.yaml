@@ -6,7 +6,7 @@ services:
     depends_on:
       - influxdb
     volumes:
-      - ${GARMINCONNECT-TOKENS}:/home/appuser/.garminconnect # (persistant tokens storage - garminconnect-tokens folder must be owned by 1000:1000)
+      - ${GARMINCONNECT_TOKENS}:/home/appuser/.garminconnect # (persistant tokens storage - garminconnect-tokens folder must be owned by 1000:1000)
     environment:
       - INFLUXDB_HOST=influxdb
       - INFLUXDB_PORT=8086
