@@ -4,7 +4,7 @@ services:
     container_name: vaultwarden
     restart: unless-stopped
     environment:
-      DOMAIN: "https://vw.mbuz.uk/"
+      DOMAIN: "${DOMAIN}"
     volumes:
       - ${PATH_TO_DATA}:/data
     ports:
