@@ -8,4 +8,4 @@ services:
     volumes:
       - ${PATH_TO_DATA}:/data
     ports:
-      - 8000:80
+      - 8033:80
