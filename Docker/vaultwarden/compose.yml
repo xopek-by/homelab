@@ -1,0 +1,11 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: "https://vw.mbuz.uk/"
+    volumes:
+      - ${PATH_TO_DATA}:/data
+    ports:
+      - 8000:80
