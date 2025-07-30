@@ -12,10 +12,6 @@ services:
       # PostgreSQL will be stored in a local folder
       - ${PATH_TO_POSTGRES}:/var/lib/postgresql/data
       - ${PATH_TO_SCRIPT}:/docker-entrypoint-initdb.d/init-data.sh
-    configs:
-      - source: n8n_init_script
-        target: /docker-entrypoint-initdb.d/init-data.sh
-        mode: 0755 # Important: make the script executable
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -h localhost -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
       interval: 5s
