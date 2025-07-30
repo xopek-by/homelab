@@ -9,7 +9,7 @@ services:
       - POSTGRES_NON_ROOT_USER
       - POSTGRES_NON_ROOT_PASSWORD
     volumes:
-      # Данные PostgreSQL будут храниться в локальной папке
+      # PostgreSQL will be stored in a local folder
       - ${PATH_TO_POSTGRES}:/var/lib/postgresql/data
       - ./init-data.sh:/docker-entrypoint-initdb.d/init-data.sh
     healthcheck:
@@ -33,7 +33,7 @@ services:
     links:
       - postgres
     volumes:
-      # Данные n8n будут храниться в локальной папке
+      # n8n data will be stored in a local folder
       - ${PATH_TO_APP}:/home/node/.n8n
     depends_on:
       postgres:
