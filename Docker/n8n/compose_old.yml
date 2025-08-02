@@ -13,6 +13,7 @@ services:
       - WEBHOOK_URL=https://${DOMAIN}/
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - N8N_RUNNERS_ENABLED=true
     volumes:
       - n8n_data:/home/node/.n8n
       - ${PATH_TO_FILES}:/files
